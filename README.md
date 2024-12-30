@@ -25,6 +25,7 @@ project/
 ├── processed_audio/         # Output folder for processed audio files
 ├── video_file_list.txt      # File list for video segments
 ├── audio_file_list.txt      # File list for audio segments
+├── donwload.py              # Script to download .m4s files from the website
 └── generate_file_lists.py   # Script to generate file lists
 ```
 
@@ -32,31 +33,36 @@ project/
 
 ## Usage
 
-### 1. Generate File Lists
-Run the following Python script to create `video_file_list.txt` and `audio_file_list.txt`:
+### 1. Download .m4s Segments
+Use `download.py` to download video and audio `.m4s` segments:
 ```bash
-python generate_file_lists.py
+python download.py
 ```
 
-### 2. Convert Segments to Usable MP4
+### 2. Generate File Lists
+Run the following Python script to create `video_file_list.txt` and `audio_file_list.txt`:
+```bash
+python generate_list.py
+```
+
+### 3. Convert Segments to Usable MP4
 Process `.m4s` segments using an initialization file (`init.mp4`):
 ```bash
 python process_segments.py
 ```
 
-### 3. Concatenate Segments
+### 4. Concatenate Segments
 Merge all processed video and audio segments into single media files:
 ```bash
 ffmpeg -f concat -safe 0 -i video_file_list.txt -c copy video_output.mp4
 ffmpeg -f concat -safe 0 -i audio_file_list.txt -c copy audio_output.mp4
 ```
 
-### 4. Combine Video and Audio
+### 5. Combine Video and Audio
 Merge the final video and audio files into a single output:
 ```bash
 ffmpeg -i video_output.mp4 -i audio_output.mp4 -c copy final_output.mp4
 ```
-
 ---
 
 ## Notes
